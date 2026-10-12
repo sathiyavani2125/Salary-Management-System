@@ -27,11 +27,15 @@ export class EmployeeService {
     minSalary?: number,
     maxSalary?: number,
     page: number = 0,
-    size: number = 20
+    size: number = 20,
+    sort: string = 'lastName',
+    direction: string = 'asc'
   ): Observable<PageResponse<Employee>> {
     let params = new HttpParams()
       .set('page', page.toString())
-      .set('size', size.toString());
+      .set('size', size.toString())
+      .set('sort', sort)
+      .set('direction', direction);
 
     if (searchTerm) params = params.set('searchTerm', searchTerm);
     if (department) params = params.set('department', department);

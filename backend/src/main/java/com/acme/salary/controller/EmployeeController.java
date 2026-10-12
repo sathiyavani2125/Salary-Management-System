@@ -40,9 +40,11 @@ public class EmployeeController {
             @QueryValue @Nullable String country,
             @QueryValue @Nullable BigDecimal minSalary,
             @QueryValue @Nullable BigDecimal maxSalary,
+            @QueryValue(defaultValue = "lastName") String sort,
+            @QueryValue(defaultValue = "asc") String direction,
             @QueryValue(defaultValue = "0") int page,
             @QueryValue(defaultValue = "20") int size) {
-        Pageable pageable = Pageable.from(page, size);
+        Pageable pageable = Pageable.from(page, size).order(sort + ":" + direction);
         return employeeService.searchEmployees(searchTerm, department, country, minSalary, maxSalary, pageable);
     }
 
