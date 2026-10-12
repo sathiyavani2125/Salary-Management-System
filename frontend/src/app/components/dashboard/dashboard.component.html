@@ -47,6 +47,31 @@
       </div>
     </div>
 
+    <section class="workforce-highlights" *ngIf="analytics.totalEmployees > 0">
+      <h2>Workforce Highlights</h2>
+      <div class="highlights-grid">
+        <article class="highlight-item" *ngIf="getLargestDepartment() as largestDepartment">
+          <span class="highlight-label">Largest department</span>
+          <strong class="highlight-value">{{ largestDepartment.name }}</strong>
+          <span class="highlight-detail">
+            {{ largestDepartment.count | number }} employees · {{ largestDepartment.share | number:'1.0-1' }}% of workforce
+          </span>
+        </article>
+        <article class="highlight-item" *ngIf="getHighestSalaryDepartment() as highestSalaryDepartment">
+          <span class="highlight-label">Highest average salary</span>
+          <strong class="highlight-value">{{ highestSalaryDepartment.name }}</strong>
+          <span class="highlight-detail">{{ formatCurrency(highestSalaryDepartment.averageSalary) }} average</span>
+        </article>
+        <article class="highlight-item" *ngIf="getMostPopulatedSalaryBand() as salaryBand">
+          <span class="highlight-label">Most common salary band</span>
+          <strong class="highlight-value">{{ salaryBand.range }}</strong>
+          <span class="highlight-detail">
+            {{ salaryBand.count | number }} employees · {{ salaryBand.share | number:'1.0-1' }}% of workforce
+          </span>
+        </article>
+      </div>
+    </section>
+
     <!-- Salary Range -->
     <div class="info-card">
       <div class="card-header">

@@ -146,6 +146,52 @@
   margin-bottom: 1.5rem;
 }
 
+.workforce-highlights {
+  margin: 0 0 1.5rem;
+
+  h2 {
+    margin: 0 0 0.875rem;
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.highlight-item {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.125rem 1.25rem;
+  border-left: 3px solid var(--accent-color);
+  background: var(--card-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.highlight-label {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.highlight-value {
+  overflow-wrap: anywhere;
+  color: var(--text-primary);
+  font-size: 1.125rem;
+}
+
+.highlight-detail {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
 .metric-card {
   background: var(--card-bg);
   border-radius: 8px;
