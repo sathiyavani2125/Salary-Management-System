@@ -34,6 +34,10 @@ export interface PageResponse<T> {
 
 export interface AnalyticsData {
   totalEmployees: number;
+  activeEmployees: number;
+  inactiveEmployees: number;
+  topDepartment: string;
+  topCountry: string;
   totalPayroll: number;
   averageSalary: number;
   medianSalary: number;

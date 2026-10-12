@@ -8,6 +8,10 @@ import java.util.Map;
 public class AnalyticsDTO {
     
     private long totalEmployees;
+    private long activeEmployees;
+    private long inactiveEmployees;
+    private String topDepartment;
+    private String topCountry;
     private BigDecimal totalPayroll;
     private BigDecimal averageSalary;
     private BigDecimal medianSalary;
@@ -27,6 +31,38 @@ public class AnalyticsDTO {
 
     public void setTotalEmployees(long totalEmployees) {
         this.totalEmployees = totalEmployees;
+    }
+
+    public long getActiveEmployees() {
+        return activeEmployees;
+    }
+
+    public void setActiveEmployees(long activeEmployees) {
+        this.activeEmployees = activeEmployees;
+    }
+
+    public long getInactiveEmployees() {
+        return inactiveEmployees;
+    }
+
+    public void setInactiveEmployees(long inactiveEmployees) {
+        this.inactiveEmployees = inactiveEmployees;
+    }
+
+    public String getTopDepartment() {
+        return topDepartment;
+    }
+
+    public void setTopDepartment(String topDepartment) {
+        this.topDepartment = topDepartment;
+    }
+
+    public String getTopCountry() {
+        return topCountry;
+    }
+
+    public void setTopCountry(String topCountry) {
+        this.topCountry = topCountry;
     }
 
     public BigDecimal getTotalPayroll() {

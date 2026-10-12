@@ -36,6 +36,7 @@ class AnalyticsServiceTest {
         // Arrange
         List<Employee> employees = createSampleEmployees();
         when(employeeRepository.findAllActive()).thenReturn(employees);
+        when(employeeRepository.count()).thenReturn((long) employees.size());
 
         // Act
         AnalyticsDTO result = analyticsService.getOverviewAnalytics();
@@ -53,6 +54,7 @@ class AnalyticsServiceTest {
     void getOverviewAnalytics_WithNoEmployees_ReturnsEmptyStatistics() {
         // Arrange
         when(employeeRepository.findAllActive()).thenReturn(Arrays.asList());
+        when(employeeRepository.count()).thenReturn(0L);
 
         // Act
         AnalyticsDTO result = analyticsService.getOverviewAnalytics();
@@ -68,6 +70,7 @@ class AnalyticsServiceTest {
         // Arrange
         List<Employee> employees = createSampleEmployees();
         when(employeeRepository.findAllActive()).thenReturn(employees);
+        when(employeeRepository.count()).thenReturn((long) employees.size());
 
         // Act
         AnalyticsDTO result = analyticsService.getOverviewAnalytics();
@@ -82,6 +85,7 @@ class AnalyticsServiceTest {
         // Arrange
         List<Employee> employees = createSampleEmployees();
         when(employeeRepository.findAllActive()).thenReturn(employees);
+        when(employeeRepository.count()).thenReturn((long) employees.size());
 
         // Act
         AnalyticsDTO result = analyticsService.getOverviewAnalytics();
@@ -97,6 +101,7 @@ class AnalyticsServiceTest {
         // Arrange
         List<Employee> employees = createSampleEmployees();
         when(employeeRepository.findAllActive()).thenReturn(employees);
+        when(employeeRepository.count()).thenReturn((long) employees.size());
 
         // Act
         AnalyticsDTO result = analyticsService.getOverviewAnalytics();

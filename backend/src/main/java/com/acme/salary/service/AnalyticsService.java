@@ -21,9 +21,12 @@ public class AnalyticsService {
 
     public AnalyticsDTO getOverviewAnalytics() {
         List<Employee> allEmployees = employeeRepository.findAllActive();
+        long totalEmployees = employeeRepository.count();
         
         AnalyticsDTO analytics = new AnalyticsDTO();
         analytics.setTotalEmployees(allEmployees.size());
+        analytics.setActiveEmployees(allEmployees.size());
+        analytics.setInactiveEmployees(Math.max(0, (int) (totalEmployees - allEmployees.size())));
         
         if (allEmployees.isEmpty()) {
             return analytics;
@@ -64,6 +67,10 @@ public class AnalyticsService {
                         )
                 ));
         analytics.setDepartmentBreakdown(deptBreakdown);
+        analytics.setTopDepartment(deptBreakdown.entrySet().stream()
+                .max(Comparator.comparingLong(entry -> entry.getValue().getCount()))
+                .map(Map.Entry::getKey)
+                .orElse(null));
 
         // Country breakdown
         Map<String, AnalyticsDTO.CountryStats> countryBreakdown = allEmployees.stream()
@@ -78,6 +85,10 @@ public class AnalyticsService {
                         )
                 ));
         analytics.setCountryBreakdown(countryBreakdown);
+        analytics.setTopCountry(countryBreakdown.entrySet().stream()
+                .max(Comparator.comparingLong(entry -> entry.getValue().getCount()))
+                .map(Map.Entry::getKey)
+                .orElse(null));
 
         // Salary distribution (histogram)
         Map<String, Long> distribution = new LinkedHashMap<>();
