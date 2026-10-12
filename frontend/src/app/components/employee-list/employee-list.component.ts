@@ -29,6 +29,10 @@ export class EmployeeListComponent implements OnInit {
   searchTerm = '';
   selectedDepartment = '';
   selectedCountry = '';
+  minSalary = '';
+  maxSalary = '';
+  sortField = 'lastName';
+  sortDirection = 'asc';
   private searchSubject = new Subject<string>();
 
   departments = ['Engineering', 'Sales', 'Marketing', 'Finance', 'Human Resources', 'Operations', 'Customer Support', 'Product Management', 'Legal'];
@@ -56,21 +60,27 @@ export class EmployeeListComponent implements OnInit {
     this.loading = true;
     this.error = null;
 
-    if (this.searchTerm || this.selectedDepartment || this.selectedCountry) {
+    const hasSalaryFilter = this.minSalary.trim() !== '' || this.maxSalary.trim() !== '';
+    const parsedMinSalary = this.minSalary.trim() ? Number(this.minSalary) : undefined;
+    const parsedMaxSalary = this.maxSalary.trim() ? Number(this.maxSalary) : undefined;
+
+    if (this.searchTerm || this.selectedDepartment || this.selectedCountry || hasSalaryFilter) {
       this.employeeService.searchEmployees(
         this.searchTerm || undefined,
         this.selectedDepartment || undefined,
         this.selectedCountry || undefined,
-        undefined,
-        undefined,
+        Number.isFinite(parsedMinSalary) ? parsedMinSalary : undefined,
+        Number.isFinite(parsedMaxSalary) ? parsedMaxSalary : undefined,
         this.currentPage,
-        this.pageSize
+        this.pageSize,
+        this.sortField,
+        this.sortDirection
       ).subscribe({
         next: (response) => this.handleResponse(response),
         error: (err) => this.handleError(err)
       });
     } else {
-      this.employeeService.getEmployees(this.currentPage, this.pageSize).subscribe({
+      this.employeeService.getEmployees(this.currentPage, this.pageSize, `${this.sortField}:${this.sortDirection}`).subscribe({
         next: (response) => this.handleResponse(response),
         error: (err) => this.handleError(err)
       });
@@ -105,10 +115,19 @@ export class EmployeeListComponent implements OnInit {
     this.loadEmployees();
   }
 
+  onSortChange(): void {
+    this.currentPage = 0;
+    this.loadEmployees();
+  }
+
   clearFilters(): void {
     this.searchTerm = '';
     this.selectedDepartment = '';
     this.selectedCountry = '';
+    this.minSalary = '';
+    this.maxSalary = '';
+    this.sortField = 'lastName';
+    this.sortDirection = 'asc';
     this.currentPage = 0;
     this.loadEmployees();
   }

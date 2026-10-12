@@ -57,6 +57,60 @@
         </select>
       </div>
 
+      <div class="filter-group">
+        <label for="minSalary">Min Salary</label>
+        <input
+          id="minSalary"
+          type="number"
+          min="0"
+          placeholder="Minimum"
+          [(ngModel)]="minSalary"
+          (ngModelChange)="onFilterChange()"
+          class="form-input"
+        />
+      </div>
+
+      <div class="filter-group">
+        <label for="maxSalary">Max Salary</label>
+        <input
+          id="maxSalary"
+          type="number"
+          min="0"
+          placeholder="Maximum"
+          [(ngModel)]="maxSalary"
+          (ngModelChange)="onFilterChange()"
+          class="form-input"
+        />
+      </div>
+
+      <div class="filter-group">
+        <label for="sortSelect">Sort By</label>
+        <select
+          id="sortSelect"
+          [(ngModel)]="sortField"
+          (change)="onSortChange()"
+          class="form-select"
+        >
+          <option value="lastName">Last Name</option>
+          <option value="firstName">First Name</option>
+          <option value="salary">Salary</option>
+          <option value="department">Department</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="directionSelect">Order</label>
+        <select
+          id="directionSelect"
+          [(ngModel)]="sortDirection"
+          (change)="onSortChange()"
+          class="form-select"
+        >
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
+
       <div class="filter-group filter-actions">
         <label>&nbsp;</label>
         <button (click)="clearFilters()" class="btn btn-secondary">
